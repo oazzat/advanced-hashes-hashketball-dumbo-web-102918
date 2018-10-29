@@ -122,16 +122,23 @@ def game_hash
   }
 end
 
+def all_players
+  all_players = game_hash[:home][:players]
+  all_players.merge(game_hash[:away][:players])
+end 
+
 def num_points_scored (name)
-  points = 0
-  game_hash.each do |key,val|
-    val[:players].each do |inkey,inval|
-      if inkey.to_s == name
-        points = inval[:points]
-      end
-    end 
-  end 
-  return points
+  all_players[name.to_sym][:points]
+
+#  points = 0
+#  game_hash.each do |key,val|
+#    val[:players].each do |inkey,inval|
+#      if inkey.to_s == name
+#        points = inval[:points]
+#      end
+#    end 
+#  end 
+#  return points
 end
 
 def shoe_size (name)
